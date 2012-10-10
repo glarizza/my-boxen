@@ -1,6 +1,6 @@
 class people::gary {
 
-  package { 'Vagrant',
+  package { 'Vagrant':
     ensure => installed,
     source => 'http://files.vagrantup.com/packages/be0bc66efc0c5919e92d8b79e973d9911f2a511f/Vagrant-1.0.5.dmg',
     provider => pkgdmg,
@@ -18,7 +18,7 @@ class people::gary {
   }
 
   package { 'Dropbox':
-    source   => 'https://ddr3luum8vl5r.cloudfront.net/Dropbox%201.4.3.dmg'
+    source   => 'https://ddr3luum8vl5r.cloudfront.net/Dropbox%201.4.3.dmg',
     provider => appdmg,
   }
 
@@ -36,7 +36,7 @@ class people::gary {
   }
 
   package { 'Sparrow':
-    source   => 'http://download.sparrowmailapp.com/appcast/Sparrow-latest.dmg'
+    source   => 'http://download.sparrowmailapp.com/appcast/Sparrow-latest.dmg',
     provider => appdmg,
   }
 
