@@ -57,10 +57,10 @@ class people::gary {
   ################
   # Repositories #
   ################
-  file { '/Users/glarizza/src':
-    ensure => directory,
-    mode   => '0755',
-  }
+  #file { '/Users/glarizza/src':
+  #  ensure => directory,
+  #  mode   => '0755',
+  #}
 
   git::config::global{ 'user.name':
     value => 'Gary Larizza',
