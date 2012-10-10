@@ -26,6 +26,7 @@ class people::gary {
     provider => appdmg,
   }
 
+  package { 'gawk': }
   package { 'zsh': }
 
   file_line { 'add zsh to /etc/shells':
