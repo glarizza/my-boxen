@@ -1,5 +1,9 @@
 class people::gary {
 
+  ############
+  # Packages #
+  ############
+
   package { 'Vagrant':
     ensure => installed,
     source => 'http://files.vagrantup.com/packages/be0bc66efc0c5919e92d8b79e973d9911f2a511f/Vagrant-1.0.5.dmg',
@@ -43,5 +47,21 @@ class people::gary {
   package { 'Chrome':
     source   => 'http://dl.google.com/chrome/mac/stable/GoogleChrome.dmg',
     provider => appdmg,
+  }
+
+
+  ################
+  # Repositories #
+  ################
+  git::config::global{ 'user.name':
+    value => 'Gary Larizza',
+  }
+
+  git::config::global{ 'user.email':
+    value => 'gary@puppetlabs.com',
+  }
+
+  repository { '/Users/glarizza/.vim':
+    source => 'glarizza/vim-puppet'
   }
 }
