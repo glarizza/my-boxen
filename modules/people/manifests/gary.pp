@@ -80,7 +80,7 @@ class people::gary {
   }
 
   repository { '/Users/glarizza/src/dotfiles':
-    source => 'glarizza/',
+    source => 'glarizza/dotfiles',
     require => File['/Users/glarizza/src'],
   }
 
