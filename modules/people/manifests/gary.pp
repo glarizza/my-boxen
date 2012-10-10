@@ -85,8 +85,15 @@ class people::gary {
   }
 
   file { '/Users/glarizza/.zshrc':
-    ensure => link,
-    mode   => '0644',
-    target => '/Users/glarizza/src/dotfiles/zshrc',
+    ensure  => link,
+    mode    => '0644',
+    target  => '/Users/glarizza/src/dotfiles/zshrc',
+    require => Repository['/Users/glarizza/src/dotfiles'],
+  }
+
+  file { '/Users/glarizza/.oh-my-zsh':
+    ensure  => link,
+    target  => '/Users/glarizza/src/oh-my-zsh',
+    require => Repository['/Users/glarizza/src/oh-my-zsh'],
   }
 }
