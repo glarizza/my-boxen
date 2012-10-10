@@ -46,6 +46,7 @@ node default {
   include nginx
   include nvm
   include rbenv
+  include people::gary
 
   # fail if FDE is not enabled
   if $::root_encrypted == false {
