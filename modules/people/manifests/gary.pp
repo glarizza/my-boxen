@@ -49,10 +49,19 @@ class people::gary {
     provider => appdmg,
   }
 
+  File {
+    owner  => 'glarizza',
+    group  => 'staff',
+  }
 
   ################
   # Repositories #
   ################
+  file { '/Users/glarizza/src':
+    ensure => directory,
+    mode   => '0755',
+  }
+
   git::config::global{ 'user.name':
     value => 'Gary Larizza',
   }
@@ -63,5 +72,21 @@ class people::gary {
 
   repository { '/Users/glarizza/.vim':
     source => 'glarizza/vim-puppet'
+  }
+
+  repository { '/Users/glarizza/src/oh-my-zsh':
+    source  => 'glarizza/oh-my-zsh',
+    require => File['/Users/glarizza/src'],
+  }
+
+  repository { '/Users/glarizza/src/dotfiles':
+    source => 'glarizza/',
+    require => File['/Users/glarizza/src'],
+  }
+
+  file { '/Users/glarizza/.zshrc':
+    ensure => link,
+    mode   => '0644',
+    target => '/Users/glarizza/src/dotfiles/zshrc',
   }
 }
