@@ -1,8 +1,23 @@
 class people::gary {
 
+  #############
+  # Variables #
+  #############
+
   $my_username  = 'glarizza'
   $my_homedir   = "/Users/${my_username}"
   $my_sourcedir = "${my_homedir}/src"
+
+
+  ############
+  # Defaults #
+  ############
+
+  File {
+    owner  => $my_username,
+    group  => 'staff',
+  }
+
 
   ############
   # Packages #
@@ -54,9 +69,6 @@ class people::gary {
     provider => appdmg,
   }
 
-  File {
-    owner  => $my_username,
-    group  => 'staff',
   }
 
 
