@@ -3,7 +3,7 @@ class people::gary {
   include sublime_text_2
   include gitx
   include caffeine
-  include imagemagick
+  #include imagemagick  # Enable when puppet-xquartz is released
   include iterm2
   include macvim
   include onepassword
