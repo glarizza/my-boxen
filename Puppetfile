@@ -30,6 +30,7 @@ mod "caffeine",       "0.0.1",   :github_tarball => "boxen/puppet-caffeine"
 mod "imagemagick",    "0.0.1",   :github_tarball => "boxen/puppet-imagemagick"
 mod "iterm2",         "0.0.1",   :github_tarball => "boxen/puppet-iterm2"
 mod "macvim",         "0.0.1",   :github_tarball => "boxen/puppet-macvim"
+mod "xquartz",        "0.0.1",   :github_tarball => "boxen/puppet-xquartz"
 
 # Add your custom modules here.
 # There are tons available at https://github.com/boxen.
