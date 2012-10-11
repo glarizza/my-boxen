@@ -1,5 +1,9 @@
 class people::gary {
 
+  $my_username  = 'glarizza'
+  $my_homedir   = "/Users/${my_username}"
+  $my_sourcedir = "${my_homedir}/src"
+
   ############
   # Packages #
   ############
@@ -51,17 +55,14 @@ class people::gary {
   }
 
   File {
-    owner  => 'glarizza',
+    owner  => $my_username,
     group  => 'staff',
   }
 
-  ################
-  # Repositories #
-  ################
-  #file { '/Users/glarizza/src':
-  #  ensure => directory,
-  #  mode   => '0755',
-  #}
+
+  ###############################
+  # Git config and repositories #
+  ###############################
 
   git::config::global{ 'user.name':
     value => 'Gary Larizza',
@@ -71,30 +72,51 @@ class people::gary {
     value => 'gary@puppetlabs.com',
   }
 
-  repository { '/Users/glarizza/.vim':
+  repository { "${my_sourcedir}/saleseng-demo-environment":
+    source => 'puppetlabs/saleseng-demo-environment',
+  }
+
+  repository { "/Users/${my_username}/.vim":
     source => 'glarizza/vim-puppet'
   }
 
-  repository { '/Users/glarizza/src/oh-my-zsh':
+  repository { "${my_sourcedir}/oh-my-zsh":
     source  => 'glarizza/oh-my-zsh',
-    require => File['/Users/glarizza/src'],
   }
 
-  repository { '/Users/glarizza/src/dotfiles':
+  repository { "${my_sourcedir}/dotfiles":
     source => 'glarizza/dotfiles',
-    require => File['/Users/glarizza/src'],
   }
 
-  file { '/Users/glarizza/.zshrc':
+  file { "/Users/${my_username}/.zshrc":
     ensure  => link,
     mode    => '0644',
-    target  => '/Users/glarizza/src/dotfiles/zshrc',
-    require => Repository['/Users/glarizza/src/dotfiles'],
+    target  => "${my_sourcedir}/dotfiles/zshrc",
+    require => Repository["${my_sourcedir}/dotfiles"],
   }
 
-  file { '/Users/glarizza/.oh-my-zsh':
+  file { "/Users/${my_username}/.oh-my-zsh":
     ensure  => link,
-    target  => '/Users/glarizza/src/oh-my-zsh',
-    require => Repository['/Users/glarizza/src/oh-my-zsh'],
+    target  => "${my_sourcedir}/oh-my-zsh",
+    require => Repository["${my_sourcedir}/oh-my-zsh"],
+  }
+
+
+  ##################################
+  ## Facter, Puppet, and Envpuppet##
+  ##################################
+
+  repository { "${my_sourcedir}/puppet":
+    source => 'puppetlabs/puppet',
+  }
+
+  repository { "${my_sourcedir}/facter":
+    source => 'puppetlabs/facter',
+  }
+
+  file { '/bin/envpuppet':
+    ensure  => link,
+    target  => "${my_sourcedir}/puppet/ext/envpuppet",
+    require => Repository["${my_sourcedir}/puppet"],
   }
 }
