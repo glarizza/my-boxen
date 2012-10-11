@@ -1,5 +1,7 @@
 class people::gary {
 
+  include onepassword
+
   #############
   # Variables #
   #############
