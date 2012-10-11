@@ -69,6 +69,26 @@ class people::gary {
     provider => appdmg,
   }
 
+  package { 'Tunnelblick':
+    source   => 'http://tunnelblick.googlecode.com/files/Tunnelblick_3.3beta21a.dmg',
+    provider => appdmg,
+  }
+
+  package { 'CoRD':
+    source   => 'http://iweb.dl.sourceforge.net/project/cord/cord/0.5.7/CoRD_0.5.7.zip',
+    provider => compressed_app,
+  }
+
+  package { 'Crashplan':
+    source   => 'http://download.crashplan.com/installs/mac/install/CrashPlan/CrashPlan_3.2.1_Mac.dmg',
+    provider => pkgdmg,
+  }
+
+  package { 'macvim': }
+
+  package { 'Yorufukurou':
+    source   => 'http://aki-null.net/yf/YoruFukurou_SL.zip',
+    provider => compressed_app,
   }
 
 
