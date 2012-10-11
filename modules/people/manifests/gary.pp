@@ -116,6 +116,7 @@ class people::gary {
 
   file { '/bin/envpuppet':
     ensure  => link,
+    mode    => '0755',
     target  => "${my_sourcedir}/puppet/ext/envpuppet",
     require => Repository["${my_sourcedir}/puppet"],
   }
