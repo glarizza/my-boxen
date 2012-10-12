@@ -32,12 +32,6 @@ class people::gary {
   # Packages #
   ############
 
-  package { 'Vagrant':
-    ensure => installed,
-    source => 'http://files.vagrantup.com/packages/be0bc66efc0c5919e92d8b79e973d9911f2a511f/Vagrant-1.0.5.dmg',
-    provider => pkgdmg,
-  }
-
   package { 'Virtualbox':
     ensure => installed,
     source => 'http://download.virtualbox.org/virtualbox/4.1.22/VirtualBox-4.1.23-80870-OSX.dmg',
