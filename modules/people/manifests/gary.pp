@@ -3,8 +3,8 @@ class people::gary {
   include sublime_text_2
   include gitx
   include caffeine
-  include imagemagick
-  include xquartz
+  #include imagemagick
+  #include xquartz          # <--Source in xquartz is broken
   include iterm2::stable
   include macvim
   include onepassword
