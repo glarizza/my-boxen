@@ -5,7 +5,7 @@ class people::gary {
   include caffeine
   include imagemagick
   include xquartz
-  include iterm2
+  include iterm2::stable
   include macvim
   include onepassword
 
