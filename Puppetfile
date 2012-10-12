@@ -24,6 +24,12 @@ mod "ruby",     "0.0.9",   :github_tarball => "boxen/puppet-ruby"
 mod "stdlib",   "3.0.0",   :github_tarball => "puppetlabs/puppetlabs-stdlib"
 mod "sudo",     "0.0.1",   :github_tarball => "boxen/puppet-sudo"
 mod "onepassword", "0.0.1",   :github_tarball => "boxen/puppet-onepassword"
+mod "sublime_text_2", "0.0.1",   :github_tarball => "boxen/puppet-sublime_text_2"
+mod "gitx",           "0.0.1",   :github_tarball => "boxen/puppet-gitx"
+mod "caffeine",       "0.0.1",   :github_tarball => "boxen/puppet-caffeine"
+mod "imagemagick",    "0.0.1",   :github_tarball => "boxen/puppet-imagemagick"
+mod "iterm2",         "0.0.1",   :github_tarball => "boxen/puppet-iterm2"
+mod "macvim",         "0.0.1",   :github_tarball => "boxen/puppet-macvim"
 
 # Add your custom modules here.
 # There are tons available at https://github.com/boxen.

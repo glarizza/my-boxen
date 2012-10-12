@@ -1,5 +1,11 @@
 class people::gary {
 
+  include sublime_text_2
+  include gitx
+  include caffeine
+  include imagemagick
+  include iterm2
+  include macvim
   include onepassword
 
   #############
@@ -85,8 +91,6 @@ class people::gary {
     source   => 'http://download.crashplan.com/installs/mac/install/CrashPlan/CrashPlan_3.2.1_Mac.dmg',
     provider => pkgdmg,
   }
-
-  package { 'macvim': }
 
   package { 'Yorufukurou':
     source   => 'http://aki-null.net/yf/YoruFukurou_SL.zip',
