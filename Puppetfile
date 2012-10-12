@@ -23,6 +23,7 @@ mod "rbenv",    "0.0.2",   :github_tarball => "boxen/puppet-rbenv"
 mod "ruby",     "0.0.9",   :github_tarball => "boxen/puppet-ruby"
 mod "stdlib",   "3.0.0",   :github_tarball => "puppetlabs/puppetlabs-stdlib"
 mod "sudo",     "0.0.1",   :github_tarball => "boxen/puppet-sudo"
+mod "onepassword", "0.0.1",   :github_tarball => "boxen/puppet-onepassword"
 
 # Add your custom modules here.
 # There are tons available at https://github.com/boxen.
