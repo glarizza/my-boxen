@@ -27,6 +27,17 @@ class people::gary {
   }
 
 
+  ###############
+  # User Config #
+  ###############
+
+  # Changes the default shell to the zsh version we get from Homebrew
+  # Uses the osx_chsh type out of boxen/puppet-osx
+  osx_chsh { 'glarizza':
+    shell   => '/opt/boxen/homebrew/bin/zsh',
+    require => Package['zsh'],
+  }
+
   ############
   # Packages #
   ############
