@@ -6,7 +6,6 @@ class people::gary {
   #include imagemagick
   #include xquartz          # <--Source in xquartz is broken
   include iterm2::stable
-  include macvim
   include onepassword
 
   #############
