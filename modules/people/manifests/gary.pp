@@ -112,6 +112,11 @@ class people::gary {
     source => 'glarizza/vim-puppet'
   }
 
+  repository { "/Users/${my_username}/.vim/bundle/vim-colors-solarized":
+    source  => 'altercation/vim-colors-solarized.git',
+    require => Repository["/Users/${my_username}/.vim"],
+  }
+
   repository { "${my_sourcedir}/oh-my-zsh":
     source  => 'glarizza/oh-my-zsh',
   }
@@ -124,6 +129,13 @@ class people::gary {
     ensure  => link,
     mode    => '0644',
     target  => "${my_sourcedir}/dotfiles/zshrc",
+    require => Repository["${my_sourcedir}/dotfiles"],
+  }
+
+  file { "/Users/${my_username}/.vimrc":
+    ensure => link,
+    mode   => '0644',
+    target => "${my_sourcedir}/dotfiles/vimrc",
     require => Repository["${my_sourcedir}/dotfiles"],
   }
 
