@@ -16,10 +16,11 @@ class garys_custom_setup {
   # Repositories #
   ################
 
-  vcsrepo { "${my_sourcedir}/saleseng_soupkitchen":
-    ensure   => present,
-    provider => git,
-    source   => 'git@git.puppetlabs.com:puppetlabs/saleseng_soupkitchen',
-  }
+  # In order to do this, we need an ssh key...which is proving troublesome
+  #vcsrepo { "${my_sourcedir}/saleseng_soupkitchen":
+  #  ensure   => present,
+  #  provider => git,
+  #  source   => 'git@git.puppetlabs.com:puppetlabs/saleseng_soupkitchen',
+  #}
 
 }
