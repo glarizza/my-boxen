@@ -16,8 +16,10 @@ class garys_custom_setup {
   # Repositories #
   ################
 
-  repository { "${my_sourcedir}/saleseng_soupkitchen":
-    source => 'git@git.puppetlabs.com:puppetlabs/saleseng_soupkitchen',
+  vcsrepo { "${my_sourcedir}/saleseng_soupkitchen":
+    ensure   => present,
+    provider => git,
+    source   => 'git@git.puppetlabs.com:puppetlabs/saleseng_soupkitchen',
   }
 
 }
