@@ -111,6 +111,14 @@ class people::gary {
     value => 'Gary Larizza',
   }
 
+  git::config::global { 'alias.lg':
+    value => "log --pretty=format:'%C(yellow)%h%C(reset) %s %C(cyan)%cr%C(reset) %C(blue)%an%C(reset) %C(green)%d%C(reset)' --graph --date-order",
+  }
+
+  git::config::global { 'alias.review':
+    value => 'log -p --reverse -M -C -C --patience --no-prefix',
+  }
+
   git::config::global{ 'user.email':
     value => 'gary@puppetlabs.com',
   }
