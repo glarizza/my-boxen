@@ -72,8 +72,43 @@ class people::gary {
     provider => compressed_app
   }
 
+  package { 'Cyberduck':
+    source   => 'http://c315635.r35.cf1.rackcdn.com/Cyberduck-4.2.1.zip',
+    provider => compressed_app
+  }
+
+  package { 'iStat Menus':
+    source   => 'http://s3.amazonaws.com/bjango/files/istatmenus3/istatmenus3.25.zip',
+    provider => compressed_app
+  }
+
+  package { 'Github for Mac':
+    source   => 'https://github-central.s3.amazonaws.com/mac%2FGitHub%20for%20Mac%2069.zip',
+    provider => compressed_app
+  }
+
   package { 'Sparrow':
     source   => 'http://download.sparrowmailapp.com/appcast/Sparrow-latest.dmg',
+    provider => appdmg,
+  }
+
+  package { 'Gephi':
+    source   => 'https://launchpadlibrarian.net/98903476/gephi-0.8.1-beta.dmg',
+    provider => appdmg,
+  }
+
+  package { 'Pacifist':
+    source   => 'http://www.charlessoft.com/pacifist_download/Pacifist_3.0.9.dmg',
+    provider => appdmg,
+  }
+
+  package { 'A Better Finder Renamer':
+    source   => 'http://d3k6s0oeufjjjn.cloudfront.net/download0_126e6b5/ABFRX8.dmg',
+    provider => appdmg,
+  }
+
+  package { 'Handbrake':
+    source   => 'http://iweb.dl.sourceforge.net/project/handbrake/0.9.8/HandBrake-0.9.8-MacOSX.6_GUI_x86_64.dmg',
     provider => appdmg,
   }
 
