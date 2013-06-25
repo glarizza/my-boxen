@@ -6,7 +6,6 @@ Exec {
   group       => 'staff',
   logoutput   => on_failure,
   user        => $luser,
-
   path => [
     "${boxen::config::home}/rbenv/shims",
     "${boxen::config::home}/rbenv/bin",
@@ -17,7 +16,6 @@ Exec {
     '/usr/sbin',
     '/sbin'
   ],
-
   environment => [
     "HOMEBREW_CACHE=${homebrew::config::cachedir}",
     "HOME=/Users/${::luser}"
@@ -57,6 +55,7 @@ node default {
   include git
   include hub
   include nginx
+  include ruby
 
   # fail if FDE is not enabled
   if $::root_encrypted == 'no' {
