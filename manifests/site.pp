@@ -5,7 +5,7 @@ require gcc
 Exec {
   group       => 'staff',
   logoutput   => on_failure,
-  user        => $luser,
+  user        => $boxen_user,
   path => [
     "${boxen::config::home}/rbenv/shims",
     "${boxen::config::home}/rbenv/bin",
@@ -18,13 +18,13 @@ Exec {
   ],
   environment => [
     "HOMEBREW_CACHE=${homebrew::config::cachedir}",
-    "HOME=/Users/${::luser}"
+    "HOME=/Users/${::boxen_user}"
   ]
 }
 
 File {
   group => 'staff',
-  owner => $luser
+  owner => $boxen_user
 }
 
 Package {
@@ -37,7 +37,7 @@ Repository {
   extra    => [
     '--recurse-submodules'
   ],
-  require  => Class['git'],
+  require  => File["${boxen::config::bindir}/boxen-git-credential"],
   config   => {
     'credential.helper' => "${boxen::config::bindir}/boxen-git-credential"
   }
@@ -61,12 +61,6 @@ node default {
   if $::root_encrypted == 'no' {
     fail('Please enable full disk encryption and try again')
   }
-
-  # node versions
-  include nodejs::v0_4
-  include nodejs::v0_6
-  include nodejs::v0_8
-  include nodejs::v0_10
 
   # default ruby versions
   include ruby::1_8_7

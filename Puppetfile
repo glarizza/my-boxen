@@ -4,50 +4,69 @@
 # default. This ensures at least the ability to construct a basic
 # environment.
 
-def github(name, version, options = nil)
-  options ||= {}
-  options[:repo] ||= "boxen/puppet-#{name}"
-  mod name, version, :github_tarball => options[:repo]
+# Shortcut for a module from GitHub's boxen organization
+def github(name, *args)
+  options ||= if args.last.is_a? Hash
+    args.last
+  else
+    {}
+  end
+
+  if path = options.delete(:path)
+    mod name, :path => path
+  else
+    version = args.first
+    options[:repo] ||= "boxen/puppet-#{name}"
+    mod name, version, :github_tarball => options[:repo]
+  end
+end
+
+# Shortcut for a module under development
+def dev(name, *args)
+  mod name, :path => "#{ENV['HOME']}/src/boxen/puppet-#{name}"
 end
 
 # Includes many of our custom types and providers, as well as global
 # config. Required.
 
-github "boxen", "2.1.0"
+github "boxen", "3.3.4"
 
 # Core modules for a basic development environment. You can replace
 # some/most of these if you want, but it's not recommended.
 
 github "dnsmasq",    "1.0.0"
-github "gcc",        "1.0.0"
-github "git",        "1.2.2"
-github "homebrew",   "1.1.2"
-github "hub",        "1.0.0"
-github "inifile",    "0.9.0", :repo => "cprice-puppet/puppetlabs-inifile"
-github "nginx",      "1.4.0"
-github "nodejs",     "2.2.0"
-github "repository", "2.0.2"
-github "ruby",       "4.1.0"
-github "stdlib",     "4.0.2", :repo => "puppetlabs/puppetlabs-stdlib"
+github "foreman",    "1.0.0"
+github "gcc",        "2.0.1"
+github "git",        "1.2.5"
+github "go",         "1.0.0"
+github "homebrew",   "1.5.1"
+github "hub",        "1.0.3"
+github "inifile",    "1.0.0", :repo => "puppetlabs/puppetlabs-inifile"
+github "nginx",      "1.4.2"
+github "openssl",    "1.0.0"
+github "pkgconfig",  "1.0.0"
+github "repository", "2.2.0"
+github "ruby",       "6.7.2"
+github "stdlib",     "4.1.0", :repo => "puppetlabs/puppetlabs-stdlib"
 github "sudo",       "1.0.0"
-mod "onepassword",        "0.0.1",   :github_tarball => "boxen/puppet-onepassword"
-mod "sublime_text_2",     "0.0.1",   :github_tarball => "boxen/puppet-sublime_text_2"
-mod "gitx",               "1.2.0",   :github_tarball => "boxen/puppet-gitx"
-mod "caffeine",           "0.0.1",   :github_tarball => "boxen/puppet-caffeine"
-mod "imagemagick",        "0.0.1",   :github_tarball => "boxen/puppet-imagemagick"
-mod "iterm2",             "0.0.1",   :github_tarball => "boxen/puppet-iterm2"
-mod "macvim",             "0.0.1",   :github_tarball => "boxen/puppet-macvim"
-mod "xquartz",            "0.0.1",   :github_tarball => "boxen/puppet-xquartz"
-mod "vcsrepo",            "0.1.0",   :github_tarball => "puppetlabs/puppetlabs-vcsrepo"
-mod "osx",                "1.3.1",   :github_tarball => "boxen/puppet-osx"
+github "onepassword",    "0.0.1"
+github "sublime_text_2", "0.0.1"
+github "gitx",           "1.2.0"
+github "caffeine",       "0.0.1"
+github "imagemagick",    "0.0.1"
+github "iterm2",         "0.0.1"
+github "macvim",         "0.0.1"
+github "xquartz",        "0.0.1"
+github "osx",            "1.3.1"
+github "dropbox",        "0.0.2"
+github "sizeup",         "0.0.1"
+github "sparrow",        "0.0.1"
+github "chrome",         "0.0.2"
+github "vagrant",        "2.0.7"
+github "xquartz",        "1.1.0"
+github "handbrake",      "0.0.1"
 mod "property_list_key",  "0.1.0",   :github_tarball => "glarizza/puppet-property_list_key"
-mod "dropbox",            "0.0.2",   :github_tarball => "boxen/puppet-dropbox"
-mod "sizeup",             "0.0.1",   :github_tarball => "boxen/puppet-sizeup"
-mod "sparrow",            "0.0.1",   :github_tarball => "boxen/puppet-sparrow"
-mod "chrome",             "0.0.2",   :github_tarball => "boxen/puppet-chrome"
-mod "handbrake",          "0.0.1",   :github_tarball => "boxen/puppet-handbrake"
-mod "dockutil",           "0.1.2",   :github_tarball => "grahamgilbert/puppet-dockutil"
-mod "vagrant",            "2.0.7",   :github_tarball => "boxen/puppet-vagrant"
+mod "vcsrepo",            "0.1.0",   :github_tarball => "puppetlabs/puppetlabs-vcsrepo"
 
 # Optional/custom modules. There are tons available at
 # https://github.com/boxen.
