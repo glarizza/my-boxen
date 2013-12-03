@@ -4,6 +4,11 @@ class people::glarizza::config (
   $my_username  = $people::glarizza::params::my_username
 ) {
 
+  File {
+    owner => $my_username,
+    group => 'staff',
+    mode  => '0644',
+  }
 
   ###############
   # User Config #
@@ -112,13 +117,39 @@ class people::glarizza::config (
     value  => 'no',
   }
 
-  #property_list_key { 'Keymapping':
-  #  ensure => present,
-  #  path   => '/Library/Preferences/ByHost/.GlobalPreferences.*.plist',
-  #  key    => 'com.apple.keyboard.modifiermapping.1452-581-0',
-  #  value  => [{'HIDKeyboardModifierMappingDst' => 2,
-  #              'HIDKeyboardModifierMappingSrc' => 0,
-  #            }],
-  #  value_type => hash,
-  #}
+  file { "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist":
+    ensure  => file,
+    mode    => '0600',
+    require => Property_list_key['Keymapping-internal', 'Keymapping-external'],
+  }
+
+  ## Because we need INTEGER values for that hash, we have to do this
+  ## ugliness.  Yes, it IS ugly.  Sorry :(
+  $two  = integer('2')
+  $zero = integer('0')
+
+  property_list_key { 'Keymapping-internal':
+    ensure => present,
+    path   => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist",
+    key    => 'com.apple.keyboard.modifiermapping.1452-566-0',
+    value  => {
+                'HIDKeyboardModifierMappingDst' => $two,
+                'HIDKeyboardModifierMappingSrc' => $zero,
+              },
+    value_type => array,
+  }
+
+  property_list_key { 'Keymapping-external':
+    ensure => present,
+    path   => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist",
+    key    => 'com.apple.keyboard.modifiermapping.1452-544-0',
+    value  => {
+                'HIDKeyboardModifierMappingDst' => $two,
+                'HIDKeyboardModifierMappingSrc' => $zero,
+              },
+    value_type => array,
+  }
+
+  $recovery_message = "Gary Larizzas Macbook Air. If found, please email glarizza@me.com or call 567-623-9123."
+  osx::recovery_message { $recovery_message: }
 }
