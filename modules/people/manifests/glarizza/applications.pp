@@ -11,7 +11,9 @@ class people::glarizza::applications {
 
   $homebrew_packages = [
     'tree',
+    'curl',
     'gawk',
+    'wget',
     'zsh',
     'nmap',
     'tmux',
