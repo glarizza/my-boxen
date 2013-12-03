@@ -15,6 +15,7 @@ class people::glarizza::applications {
     'zsh',
     'nmap',
     'tmux',
+    'rust',
     'imagemagick'
   ]
 
@@ -76,6 +77,16 @@ class people::glarizza::applications {
   package { 'Crashplan':
     source   => 'http://download.crashplan.com/installs/mac/install/CrashPlan/CrashPlan_3.2.1_Mac.dmg',
     provider => pkgdmg,
+  }
+
+  package { 'Pandoc':
+    source   => 'https://pandoc.googlecode.com/files/pandoc-1.12.1-1.dmg',
+    provider => pkgdmg,
+  }
+
+  package { 'Kindlegen':
+    source   => 'http://kindlegen.s3.amazonaws.com/KindleGen_Mac_i386_v2_9.zip',
+    provider => compressed_app,
   }
 
   package { 'Yorufukurou':

@@ -56,6 +56,11 @@ class people::glarizza::repositories (
     require => Repository["/Users/${my_username}/.vim"],
   }
 
+  repository { "/Users/${my_username}/.vim/bundle/vim-rust":
+    source  => 'wting/rust.vim.git',
+    require => Repository["/Users/${my_username}/.vim"],
+  }
+
   repository { "${my_sourcedir}/oh-my-zsh":
     source  => 'glarizza/oh-my-zsh',
   }
