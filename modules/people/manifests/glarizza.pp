@@ -8,4 +8,5 @@ class people::glarizza (
   include people::glarizza::repositories
   include people::glarizza::config
   include people::glarizza::puppet
+  include people::glarizza::vagrant
 }
