@@ -6,7 +6,6 @@ class people::glarizza::applications {
   include onepassword
   include dropbox
   include sizeup
-  include sparrow
   include chrome
 
   $homebrew_packages = [
