@@ -1,5 +1,3 @@
-# This file manages Puppet module dependencies.
-#
 # It works a lot like Bundler. We provide some core modules by
 # default. This ensures at least the ability to construct a basic
 # environment.
@@ -29,35 +27,15 @@ end
 # Includes many of our custom types and providers, as well as global
 # config. Required.
 
-<<<<<<< HEAD
-github "boxen", "3.3.5"
-=======
 github "boxen", "3.6.2"
 
 # Support for default hiera data in modules
 
 github "module_data", "0.0.3", :repo => "ripienaar/puppet-module-data"
->>>>>>> upstream/master
 
 # Core modules for a basic development environment. You can replace
 # some/most of these if you want, but it's not recommended.
 
-<<<<<<< HEAD
-github "dnsmasq",    "1.0.0"
-github "foreman",    "1.0.0"
-github "gcc",        "2.0.1"
-github "git",        "1.2.5"
-github "go",         "1.0.0"
-github "homebrew",   "1.5.1"
-github "hub",        "1.0.3"
-github "inifile",    "1.0.0", :repo => "puppetlabs/puppetlabs-inifile"
-github "nginx",      "1.4.2"
-github "openssl",    "1.0.0"
-github "pkgconfig",  "1.0.0"
-github "repository", "2.2.0"
-github "ruby",       "6.7.2"
-github "stdlib",     "4.1.0", :repo => "puppetlabs/puppetlabs-stdlib"
-github "sudo",       "1.0.0"
 github "onepassword",    "1.1.0"
 github "sublime_text_2", "1.1.2"
 github "gitx",           "1.2.0"
@@ -71,7 +49,6 @@ github "dropbox",        "1.2.0"
 github "sizeup",         "1.0.0"
 github "chrome",         "1.1.2"
 github "vagrant",        "3.0.1"
-github "xquartz",        "1.1.0"
 github "handbrake",      "1.0.1"
 github "vmware_fusion",  "1.1.0"
 github "hipchat",        "1.1.0"
@@ -79,7 +56,9 @@ github "spotify",        "1.0.1"
 github "colloquy",       "1.0.0"
 mod "property_list_key",  :ref => "13d26e008c16d59e46c4d9929496e036278998f5",   :git => "git@github.com:glarizza/puppet-property_list_key.git"
 mod "vcsrepo",            "0.1.0",   :github_tarball => "puppetlabs/puppetlabs-vcsrepo"
-=======
+
+
+
 github "dnsmasq",     "1.0.1"
 github "foreman",     "1.2.0"
 github "gcc",         "2.1.1"
@@ -98,7 +77,6 @@ github "ruby",        "8.1.2"
 github "stdlib",      "4.2.1", :repo => "puppetlabs/puppetlabs-stdlib"
 github "sudo",        "1.0.0"
 github "xquartz",     "1.1.1"
->>>>>>> upstream/master
 
 # Optional/custom modules. There are tons available at
 # https://github.com/boxen.
