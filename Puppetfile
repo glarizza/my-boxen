@@ -29,11 +29,20 @@ end
 # Includes many of our custom types and providers, as well as global
 # config. Required.
 
+<<<<<<< HEAD
 github "boxen", "3.3.5"
+=======
+github "boxen", "3.6.2"
+
+# Support for default hiera data in modules
+
+github "module_data", "0.0.3", :repo => "ripienaar/puppet-module-data"
+>>>>>>> upstream/master
 
 # Core modules for a basic development environment. You can replace
 # some/most of these if you want, but it's not recommended.
 
+<<<<<<< HEAD
 github "dnsmasq",    "1.0.0"
 github "foreman",    "1.0.0"
 github "gcc",        "2.0.1"
@@ -70,6 +79,26 @@ github "spotify",        "1.0.1"
 github "colloquy",       "1.0.0"
 mod "property_list_key",  :ref => "13d26e008c16d59e46c4d9929496e036278998f5",   :git => "git@github.com:glarizza/puppet-property_list_key.git"
 mod "vcsrepo",            "0.1.0",   :github_tarball => "puppetlabs/puppetlabs-vcsrepo"
+=======
+github "dnsmasq",     "1.0.1"
+github "foreman",     "1.2.0"
+github "gcc",         "2.1.1"
+github "git",         "2.5.0"
+github "go",          "1.1.0"
+github "homebrew",    "1.9.4"
+github "hub",         "1.3.0"
+github "inifile",     "1.1.1", :repo => "puppetlabs/puppetlabs-inifile"
+github "nginx",       "1.4.3"
+github "nodejs",      "3.8.1"
+github "openssl",     "1.0.0"
+github "phantomjs",   "2.3.0"
+github "pkgconfig",   "1.0.0"
+github "repository",  "2.3.0"
+github "ruby",        "8.1.2"
+github "stdlib",      "4.2.1", :repo => "puppetlabs/puppetlabs-stdlib"
+github "sudo",        "1.0.0"
+github "xquartz",     "1.1.1"
+>>>>>>> upstream/master
 
 # Optional/custom modules. There are tons available at
 # https://github.com/boxen.
