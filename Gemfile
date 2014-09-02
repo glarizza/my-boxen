@@ -6,7 +6,6 @@ gem "librarian-puppet",       "~> 1.0.5"
 gem "puppet",                 "3.6.1"
 gem "puppet-lint",            "0.3.2"
 gem "puppetlabs_spec_helper", "0.4.1"
-gem "open4",                  "~> 1.3"
 gem 'CFPropertyList',         '>= 2.2.5'
 gem 'libxml-ruby'
 gem "open4",                  "~> 1.3.4"
