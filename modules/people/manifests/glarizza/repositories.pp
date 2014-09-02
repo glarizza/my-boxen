@@ -43,10 +43,6 @@ class people::glarizza::repositories (
     source => 'puppetlabs/saleseng-soupkitchen',
   }
 
-  repository { "${my_sourcedir}/puppetlabs-training":
-    source => 'puppetlabs/puppetlabs-training',
-  }
-
   repository { "/Users/${my_username}/.vim":
     source => 'glarizza/vim-puppet'
   }
