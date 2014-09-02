@@ -69,6 +69,10 @@ class people::glarizza::repositories (
     source => 'cobyism/octocatsay',
   }
 
+  repository { "${my_sourcedir}/solarized":
+    source => 'altercation/solarized',
+  }
+
   repository { "${my_sourcedir}/vim-plist":
     source  => 'hunner/vim-plist',
     require => Repository["/Users/${my_username}/.vim"],

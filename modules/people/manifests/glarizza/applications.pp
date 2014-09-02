@@ -7,6 +7,9 @@ class people::glarizza::applications {
   include dropbox
   include sizeup
   include chrome
+  include hipchat
+  include spotify
+  include colloquy
 
   $homebrew_packages = [
     'tree',
@@ -16,6 +19,7 @@ class people::glarizza::applications {
     'zsh',
     'nmap',
     'tmux',
+    'packer',
     'rust',
     'imagemagick'
   ]
@@ -104,4 +108,6 @@ class people::glarizza::applications {
     source   => 'http://www.apimac.com/download/timer.dmg',
     provider => appdmg,
   }
+
+  class { 'vmware_fusion': version => '5.0.3-1040386' }
 }

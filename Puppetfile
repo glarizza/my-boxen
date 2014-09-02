@@ -29,7 +29,7 @@ end
 # Includes many of our custom types and providers, as well as global
 # config. Required.
 
-github "boxen", "3.3.4"
+github "boxen", "3.3.5"
 
 # Core modules for a basic development environment. You can replace
 # some/most of these if you want, but it's not recommended.
@@ -49,22 +49,26 @@ github "repository", "2.2.0"
 github "ruby",       "6.7.2"
 github "stdlib",     "4.1.0", :repo => "puppetlabs/puppetlabs-stdlib"
 github "sudo",       "1.0.0"
-github "onepassword",    "0.0.1"
-github "sublime_text_2", "0.0.1"
+github "onepassword",    "1.1.0"
+github "sublime_text_2", "1.1.2"
 github "gitx",           "1.2.0"
 github "caffeine",       "0.0.1"
-github "imagemagick",    "0.0.1"
-github "iterm2",         "0.0.1"
-github "macvim",         "0.0.1"
-github "xquartz",        "0.0.1"
-github "osx",            "1.3.1"
-github "dropbox",        "0.0.2"
-github "sizeup",         "0.0.1"
-github "chrome",         "0.0.2"
-github "vagrant",        "2.0.7"
+#github "imagemagick",    "0.0.1"
+github "iterm2",         "1.0.4"
+#github "macvim",         "1.0.0"
+#github "xquartz",        "1.1.1"
+github "osx",            "2.2.1"
+github "dropbox",        "1.2.0"
+github "sizeup",         "1.0.0"
+github "chrome",         "1.1.2"
+github "vagrant",        "3.0.1"
 github "xquartz",        "1.1.0"
-github "handbrake",      "0.0.1"
-mod "property_list_key",  "0.1.0",   :github_tarball => "glarizza/puppet-property_list_key"
+github "handbrake",      "1.0.1"
+github "vmware_fusion",  "1.1.0"
+github "hipchat",        "1.1.0"
+github "spotify",        "1.0.1"
+github "colloquy",       "1.0.0"
+mod "property_list_key",  :ref => "13d26e008c16d59e46c4d9929496e036278998f5",   :git => "git@github.com:glarizza/puppet-property_list_key.git"
 mod "vcsrepo",            "0.1.0",   :github_tarball => "puppetlabs/puppetlabs-vcsrepo"
 
 # Optional/custom modules. There are tons available at

@@ -9,6 +9,8 @@ gem "puppetlabs_spec_helper", "0.4.1"
 gem "open4",                  "~> 1.3"
 gem "rake",                   "10.0.3"
 gem "rspec-puppet",           "0.1.6"
+gem 'CFPropertyList',         '>= 2.2.5'
+gem 'libxml-ruby'
 
 group :development do
   gem "aws-sdk", "~> 1.21"
