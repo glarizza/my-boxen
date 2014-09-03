@@ -53,8 +53,8 @@ github "spotify",        "1.0.2"
 github "colloquy",       "1.0.0"
 github 'github_for_mac', '1.0.2'
 github 'packer', '0.6.0'
-github "property_list_key",  :repo => "glarizza/puppet-property_list_key"
-mod "vcsrepo",            "0.1.0",   :github_tarball => "puppetlabs/puppetlabs-vcsrepo"
+github "property_list_key", '0.2.1',  :repo => "glarizza/puppet-property_list_key"
+mod "vcsrepo",              "0.1.0",  :github_tarball => "puppetlabs/puppetlabs-vcsrepo"
 
 
 
