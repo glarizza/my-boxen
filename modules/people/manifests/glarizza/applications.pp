@@ -10,6 +10,8 @@ class people::glarizza::applications {
   include hipchat
   include spotify
   include colloquy
+  include github_for_mac
+  include packer
 
   $homebrew_packages = [
     'tree',
