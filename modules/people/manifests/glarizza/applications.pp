@@ -12,6 +12,7 @@ class people::glarizza::applications {
   include colloquy
   include github_for_mac
   include packer
+  include atom
 
   $homebrew_packages = [
     'tree',

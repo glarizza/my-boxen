@@ -55,7 +55,7 @@ github 'github_for_mac', '1.0.2'
 github 'packer', '1.3.0'
 github "property_list_key", '0.2.1',  :repo => "glarizza/puppet-property_list_key"
 mod "vcsrepo",              "0.1.0",  :github_tarball => "puppetlabs/puppetlabs-vcsrepo"
-
+github 'atom',           '1.0.0'
 
 
 github "dnsmasq",     "1.0.1"
