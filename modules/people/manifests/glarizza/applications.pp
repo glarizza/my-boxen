@@ -19,7 +19,6 @@ class people::glarizza::applications {
     'zsh',
     'nmap',
     'tmux',
-    'packer',
     'rust',
     'imagemagick'
   ]
