@@ -52,7 +52,8 @@ github "hipchat",        "1.1.0"
 github "spotify",        "1.0.2"
 github "colloquy",       "1.0.0"
 github 'github_for_mac', '1.0.2'
-mod "property_list_key",  :ref => "13d26e008c16d59e46c4d9929496e036278998f5",   :git => "git@github.com:glarizza/puppet-property_list_key.git"
+github 'packer', '0.6.0'
+mod "property_list_key",  :git => "git@github.com:glarizza/puppet-property_list_key.git"
 mod "vcsrepo",            "0.1.0",   :github_tarball => "puppetlabs/puppetlabs-vcsrepo"
 
 
