@@ -23,6 +23,7 @@ class people::glarizza::applications {
     'nmap',
     'tmux',
     'rust',
+    'libxml2',
     'imagemagick'
   ]
 
@@ -51,7 +52,7 @@ class people::glarizza::applications {
     provider => compressed_app
   }
 
-  package { 'Github for Mac':
+  package { 'Github':
     source   => 'https://github-central.s3.amazonaws.com/mac%2FGitHub%20for%20Mac%20124.zip',
     provider => compressed_app
   }
