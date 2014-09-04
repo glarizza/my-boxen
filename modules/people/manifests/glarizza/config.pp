@@ -53,10 +53,6 @@ class people::glarizza::config (
   file { 'Dock Plist':
     ensure  => file,
     owner   => $::my_username,
-    require => [
-                 Property_list_key['Lower Right Hotcorner - Screen Saver - modifier'],
-                 Property_list_key['Lower Right Hotcorner - Screen Saver'],
-               ],  
     path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
     mode    => '0600',
     notify     => Exec['Restart the Dock'],
