@@ -21,6 +21,10 @@ class people::glarizza::config (
     position => 'left',
   }
 
+  osx::dock::hot_corner { 'Show the desktop':
+    position => 'Bottom Right',
+    action => 'Put Display to Sleep'
+  }
 
   $recovery_message = "Gary Larizzas Macbook Air. If found, please email glarizza@me.com or call 567-623-9123."
   osx::recovery_message { $recovery_message: }
@@ -46,24 +50,6 @@ class people::glarizza::config (
     refreshonly => true,
   }
 
-  property_list_key { 'Lower Right Hotcorner - Screen Saver':
-    ensure     => present,
-    path       => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
-    key        => 'wvous-br-corner',
-    value      => '10', 
-    value_type => 'integer',
-    notify     => Exec['Restart the Dock'],
-  }
-
-  property_list_key { 'Lower Right Hotcorner - Screen Saver - modifier':
-    ensure     => present,
-    path       => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
-    key        => 'wvous-br-modifier',
-    value      => $zero,
-    value_type => 'integer',
-    notify     => Exec['Restart the Dock'],
-  }
-
   file { 'Dock Plist':
     ensure  => file,
     owner   => $::my_username,
@@ -76,22 +62,6 @@ class people::glarizza::config (
     notify     => Exec['Restart the Dock'],
   }
 
-  #boxen::osx_defaults { 'Lower Right Hotcorner - Screen Saver':
-  #  user   => $::boxen_user,
-  #  domain => 'com.apple.dock',
-  #  key    => 'wvous-br-corner',
-  #  value  => 10,
-  #  notify => Exec['Restart the Dock'],
-  #}
-  #
-  #boxen::osx_defaults { 'Lower Right Hotcorner - Screen Saver - modifier':
-  #  user   => $::boxen_user,
-  #  domain => 'com.apple.dock',
-  #  key    => 'wvous-br-corner-modifier',
-  #  value  => 0,
-  #  notify => Exec['Restart the Dock'],
-  #}
-  
   boxen::osx_defaults { 'Disable Gatekeeper':
     user   => $::boxen_user,
     domain => '/var/db/SystemPolicy-prefs.plist',
@@ -100,31 +70,4 @@ class people::glarizza::config (
     notify => Exec['Restart the Dock'],
   }
   
-  file { "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist":
-    ensure  => file,
-    mode    => '0600',
-    require => Property_list_key['Keymapping-internal', 'Keymapping-external'],
-  }
-
-  property_list_key { 'Keymapping-internal':
-    ensure => present,
-    path   => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist",
-    key    => 'com.apple.keyboard.modifiermapping.1452-566-0',
-    value  => {
-                'HIDKeyboardModifierMappingDst' => $two,
-                'HIDKeyboardModifierMappingSrc' => $zero,
-              },
-    value_type => array,
-  }
-
-  property_list_key { 'Keymapping-external':
-    ensure => present,
-    path   => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist",
-    key    => 'com.apple.keyboard.modifiermapping.1452-544-0',
-    value  => {
-                'HIDKeyboardModifierMappingDst' => $two,
-                'HIDKeyboardModifierMappingSrc' => $zero,
-              },
-    value_type => array,
-  }
 }
