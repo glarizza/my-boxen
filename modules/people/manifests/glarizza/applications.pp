@@ -92,11 +92,6 @@ class people::glarizza::applications {
     provider => pkgdmg,
   }
 
-  package { 'Kindlegen':
-    source   => 'http://kindlegen.s3.amazonaws.com/KindleGen_Mac_i386_v2_9.zip',
-    provider => compressed_app,
-  }
-
   package { 'Yorufukurou':
     source   => 'http://aki-null.net/yf/YoruFukurou_SL.zip',
     provider => compressed_app,
