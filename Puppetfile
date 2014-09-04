@@ -36,7 +36,7 @@ github "module_data", "0.0.3", :repo => "ripienaar/puppet-module-data"
 # Core modules for a basic development environment. You can replace
 # some/most of these if you want, but it's not recommended.
 
-github "onepassword",    "1.1.0"
+github "onepassword",    "1.1.2"
 github "sublime_text_2", "1.1.2"
 github "gitx",           "1.2.0"
 github "caffeine",       "0.0.1"
@@ -51,7 +51,7 @@ github "vmware_fusion",  "1.1.0"
 github "hipchat",        "1.1.0"
 github "spotify",        "1.0.2"
 github "colloquy",       "1.0.0"
-github 'github_for_mac', '1.0.2'
+github 'github_for_mac', '1.0.3'
 github 'packer', '1.3.0'
 github "property_list_key", '0.2.1',  :repo => "glarizza/puppet-property_list_key"
 mod "vcsrepo",              "0.1.0",  :github_tarball => "puppetlabs/puppetlabs-vcsrepo"
