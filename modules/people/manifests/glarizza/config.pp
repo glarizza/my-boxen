@@ -58,12 +58,4 @@ class people::glarizza::config (
     notify     => Exec['Restart the Dock'],
   }
 
-  boxen::osx_defaults { 'Disable Gatekeeper':
-    user   => $::boxen_user,
-    domain => '/var/db/SystemPolicy-prefs.plist',
-    key    => 'enabled',
-    value  => 'no',
-    notify => Exec['Restart the Dock'],
-  }
-  
 }
