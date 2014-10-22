@@ -42,7 +42,7 @@ github "gitx",           "1.2.0"
 github "caffeine",       "0.0.1"
 github "iterm2",         "1.0.4"
 github "osx",            "2.7.1"
-github "dropbox",        "1.2.0"
+github "dropbox",        "1.4.0"
 github "sizeup",         "1.0.0"
 github "chrome",         "1.1.2"
 github "vagrant",        "3.0.1"
@@ -76,6 +76,7 @@ github "ruby",        "8.1.2"
 github "stdlib",      "4.2.1", :repo => "puppetlabs/puppetlabs-stdlib"
 github "sudo",        "1.0.0"
 github "xquartz",     "1.1.1"
+github "skype",       "1.0.9"
 
 # Optional/custom modules. There are tons available at
 # https://github.com/boxen.

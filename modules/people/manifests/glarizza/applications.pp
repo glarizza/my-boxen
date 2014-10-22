@@ -13,6 +13,7 @@ class people::glarizza::applications {
   include github_for_mac
   include packer
   include atom
+  include skype
 
   $homebrew_packages = [
     'tree',
@@ -29,6 +30,12 @@ class people::glarizza::applications {
 
   ## Declare all Homebrew packages at once
   package { $homebrew_packages: }
+
+  package { 'reattach-to-user-namespace':
+    ensure          => installed,
+    provider        => 'homebrew',
+    install_options => '--wrap-pbcopy-and-pbpaste',
+  }
 
   package { 'Virtualbox':
     ensure => installed,
