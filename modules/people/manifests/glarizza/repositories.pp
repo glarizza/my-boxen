@@ -47,6 +47,11 @@ class people::glarizza::repositories (
     source => 'glarizza/vim-puppet'
   }
 
+  repository { "/Users/${my_username}/.vim/bundle/vim-surround":
+    source  => 'tpope/vim-surround',
+    require => Repository["/Users/${my_username}/.vim"],
+  }
+
   repository { "/Users/${my_username}/.vim/bundle/vim-colors-solarized":
     source  => 'altercation/vim-colors-solarized.git',
     require => Repository["/Users/${my_username}/.vim"],
