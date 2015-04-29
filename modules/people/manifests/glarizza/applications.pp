@@ -24,9 +24,11 @@ class people::glarizza::applications {
     'nmap',
     'tmux',
     'rust',
-    'libxml2',
-    'imagemagick'
+    'imagemagick',
   ]
+
+  # Use dupes for iconv
+  homebrew::tap { 'homebrew/dupes': }
 
   ## Declare all Homebrew packages at once
   package { $homebrew_packages: }
