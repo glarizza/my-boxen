@@ -3,6 +3,7 @@
 
 require "pathname"
 require "tempfile"
+require "base64"
 
 # Put us where we belong, in the root dir of our boxen repo.
 
@@ -10,105 +11,198 @@ Dir.chdir Pathname.new(__FILE__).realpath + "../.."
 
 # Make sure our local dependencies are up to date.
 
-abort "Sorry, can't bootstrap." unless system "script/bootstrap"
+abort "Sorry, can't bootstrap." unless system "script/bootstrap --without ''"
 
 # Set up our local configuration, deps, and load path.
 
 load "config/basic.rb"
 
-require "aws-sdk"
+require "aws-sdk-core"
 require "boxen/config"
 
-access_key  = ENV["BOXEN_S3_ACCESS_KEY"]
-secret_key  = ENV["BOXEN_S3_SECRET_KEY"]
-bucket_name = ENV["BOXEN_S3_BUCKET"]
+@access_key  = ENV["BOXEN_S3_ACCESS_KEY"]
+@secret_key  = ENV["BOXEN_S3_SECRET_KEY"]
+@bucket_name = ENV["BOXEN_S3_BUCKET"] || "boxen-downloads"
+@region      = ENV["BOXEN_S3_REGION"] || "us-east-1"
 
-unless access_key && secret_key && bucket_name
-  abort "Please set the BOXEN_S3_{ACCESS_KEY,SECRET_KEY,BUCKET} env vars."
+unless @access_key && @secret_key && @bucket_name
+  abort "Please set the BOXEN_S3_{ACCESS_KEY,SECRET_KEY} env vars."
 end
 
-s3 = AWS::S3.new :access_key_id => access_key, :secret_access_key => secret_key
-os = `sw_vers -productVersion`.strip.split(".")[0..1].join "."
+def os
+  @os ||= `sw_vers -productVersion`.strip.split(".")[0..1].join(".")
+end
 
-bucket = s3.buckets[bucket_name]
-config = Boxen::Config.load
+def s3
+  @s3 ||= Aws::S3::Client.new(
+    access_key_id: @access_key,
+    secret_access_key: @secret_key,
+    region: @region
+  )
+end
 
-# Sync Homebrew packages.
+def config
+  @config ||= Boxen::Config.load
+end
 
-Dir.chdir "#{config.homedir}/homebrew/Cellar" do
-  Dir["*/*"].each do |dir|
-    name, version = File.split dir
+def homebrew_cellar
+  cellar ||= "#{ENV['HOMEBREW_ROOT'] || File.join(config.homedir, 'homebrew')}/Cellar"
+end
 
-    file = "homebrew/#{os}/#{name}-#{version}.tar.bz2"
-    temp = Tempfile.new "homebrew"
-    obj  = bucket.objects[file]
+def object_exists?(key)
+  puts "Testing for #{key}"
+  begin
+    s3.head_object(bucket: @bucket_name, key: key)
+  rescue Aws::S3::Errors::NoSuchKey, Aws::S3::Errors::NotFound
+    # aws-sdk-core documentation claims that head_object will raise
+    # NoSuchKey, but it seems to raise NotFound. We'll catch both for
+    # now, as I suspect later versions will fix this
+    false
+  end
+end
 
-    next if obj.exists?
+# Keep in sync with same-named functions in:
+# https://github.com/boxen/puppet-homebrew/blob/master/files/boxen-bottle-hooks.rb
+# https://github.com/boxen/puppet-ruby/blob/master/lib/puppet/provider/ruby/rubybuild.rb
+def s3_cellar
+  case homebrew_cellar.to_s
+  when "/opt/boxen/homebrew/Cellar" then ""
+  when "/usr/local/Cellar" then "default/"
+  else "#{Base64.strict_encode64(HOMEBREW_CELLAR.to_s)}/"
+  end
+end
 
+def sync_brew(name, version)
+  path = "homebrew/#{s3_cellar}#{os}/#{name}-#{version}.tar.bz2"
+  return if object_exists?(path)
+
+  dir = "#{name}/#{version}"
+  receipt = IO.read "#{homebrew_cellar}/#{dir}/INSTALL_RECEIPT.json"
+  json = JSON.parse receipt
+  if json["poured_from_bottle"]
+    puts "Skipping #{name} #{version}: installed from a Homebrew bottle"
+    return
+  elsif !json["built_as_bottle"]
+    puts "Skipping #{name} #{version}: not built as a bottle"
+    puts "Please set the HOMEBREW_BUILD_BOTTLE env var and reinstall."
+    return
+  end
+
+  tempfile = Tempfile.new "homebrew"
+  begin
     printf "Snapshotting #{name} #{version}... "
     $stdout.flush
 
-    system "tar", "-cjf", temp.path, dir
-    puts "done."
+    Dir.chdir(homebrew_cellar) do
+      system "tar", "-cjf", tempfile.path, dir
+      puts "done."
+    end
 
     printf "Shipping #{name} #{version} to S3... "
     $stdout.flush
 
-    obj.write :acl => :public_read, :file => temp.path
+    File.open(tempfile, "r") do |tarball|
+      s3.put_object(bucket: @bucket_name, key: path, acl: "public-read", body: tarball)
+    end
     puts "done."
+  ensure
+    tempfile.unlink
   end
 end
 
-# Sync rbenv rubies.
+def sync_ruby(version)
+  s3_key = "rubies/Darwin/#{s3_cellar}#{os}/#{version}.tar.bz2"
+  tempfile = Tempfile.new "boxen-ruby"
 
-Dir.chdir "#{config.homedir}/rbenv/versions" do
-  Dir["*"].each do |dir|
-    next if File.symlink? dir
+  return if object_exists?(s3_key)
 
-    version = File.basename dir
-    file    = "rbenv/#{os}/#{version}.tar.bz2"
-    temp    = Tempfile.new "rbenv"
-    obj     = bucket.objects[file]
+  printf "Snapshotting ruby #{version}... "
+  $stdout.flush
 
-    next if obj.exists?
+  Dir.chdir("/opt/rubies") do
+    system "tar", "-cjf", tempfile.path, version
+  end
+  puts "done."
 
-    printf "Snapshotting ruby #{version}... "
-    $stdout.flush
+  printf "Shipping ruby #{version} to S3... "
+  $stdout.flush
 
-    system "tar -cjf #{temp.path} #{version}"
-    puts "done."
+  File.open(tempfile, "r") do |tarball|
+    puts "s3.put_object(#{{bucket: @bucket_name, key: s3_key, acl: "public-read", body: tarball}.inspect})"
+    s3.put_object(bucket: @bucket_name, key: s3_key, acl: "public-read", body: tarball)
+  end
+  puts "done."
+end
 
-    printf "Shipping ruby #{version} to S3... "
-    $stdout.flush
+def sync_node(version)
+  s3_key = "nodes/Darwin/#{os}/#{version}.tar.bz2"
+  tempfile = Tempfile.new "boxen-nodejs"
 
-    obj.write :acl => :public_read, :file => temp.path
-    puts "done."
+  return if object_exists?(s3_key)
+
+  printf "Snapshotting node #{version}... "
+  $stdout.flush
+
+  Dir.chdir("/opt/nodes") do
+    system "tar", "-cjf", tempfile.path, version
+  end
+  puts "done."
+
+  printf "Shipping node #{version} to S3... "
+  $stdout.flush
+
+  File.open(tempfile, "r") do |tarball|
+    puts "s3.put_object(#{{bucket: @bucket_name, key: s3_key, acl: "public-read", body: tarball}.inspect})"
+    s3.put_object(bucket: @bucket_name, key: s3_key, acl: "public-read", body: tarball)
+  end
+  puts "done."
+end
+
+def sync_homebrew_packages
+  Dir.chdir(homebrew_cellar) do
+    Dir["*/*"].each do |dir|
+      name, version = File.split dir
+      sync_brew name, version
+    end
   end
 end
 
-# Sync NVM nodes.
+def sync_rubies
+  Dir.chdir "/opt/rubies" do
+    Dir["*"].each do |dir|
+      next if File.symlink? dir
+      sync_ruby File.split(dir).last
+    end
+  end
+end
 
-Dir.chdir "#{config.homedir}/nodenv/versions" do
-  Dir["*"].each do |dir|
-    next if File.symlink? dir
+def sync_nodes
+  Dir.chdir "/opt/nodes" do
+    Dir["*"].each do |dir|
+      next if File.symlink? dir
+      sync_node File.split(dir).last
+    end
+  end
+end
 
-    version = File.basename dir
-    file    = "nodenv/#{os}/#{version}.tar.bz2"
-    temp    = Tempfile.new "nodenv"
-    obj     = bucket.objects[file]
+if ARGV.include? "--help" or ARGV.include? "-h"
+  $stderr.puts "Usage: #{$0} [-h|--help] [1.9.3-p448] [emacs/24.3-boxen2]"
+  $stderr.puts
+  $stderr.puts "When no arguments are specified, sync everything. You can alternatively"
+  $stderr.puts "sync a single package by either specifying a ruby version (eg `1.9.3-p448`)"
+  $stderr.puts "or a specific homebrew package (eg `emacs/24.3-boxen2`)."
+  exit 1
+elsif ARGV[0].nil?
+  # sync everything
+  sync_homebrew_packages
+  sync_rubies
+  sync_nodes
+else
+  package, version = ARGV[0].split("/")
 
-    next if obj.exists?
-
-    printf "Snapshotting node.js #{version}... "
-    $stdout.flush
-
-    system "tar -cjf #{temp.path} #{version}"
-    puts "done."
-
-    printf "Shipping node.js #{version} to S3... "
-    $stdout.flush
-
-    obj.write :acl => :public_read, :file => temp.path
-    puts "done."
+  if version
+    sync_brew package, version
+  else
+    sync_ruby package
   end
 end

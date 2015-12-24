@@ -126,19 +126,19 @@ If that runs cleanly, you're in good shape.
 This template project provides the following by default:
 
 * Homebrew
+* Homebrew-Cask
 * Git
 * Hub
 * dnsmasq w/ .dev resolver for localhost
 * rbenv
 * Full Disk Encryption requirement
-* Node.js 0.6
 * Node.js 0.8
 * Node.js 0.10
+* Node.js 0.12
 * Ruby 1.9.3
 * Ruby 2.0.0
-* Ruby 2.1.0
-* Ruby 2.1.1
-* Ruby 2.1.2
+* Ruby 2.1.7
+* Ruby 2.2.3
 * ack
 * Findutils
 * GNU tar
