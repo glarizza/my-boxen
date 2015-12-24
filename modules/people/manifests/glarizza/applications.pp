@@ -101,8 +101,8 @@ class people::glarizza::applications {
   }
 
   package { 'Timer':
-    source   => 'http://www.apimac.com/download/timer.dmg',
-    provider => appdmg,
+    source   => 'http://www.apimac.com/download/Timer.zip',
+    provider => compressed_app,
   }
 
   class { 'vmware_fusion': version => '5.0.3-1040386' }
