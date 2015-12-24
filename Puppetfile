@@ -37,7 +37,7 @@ github "module_data", "0.0.4", :repo => "ripienaar/puppet-module-data"
 # some/most of these if you want, but it's not recommended.
 
 github "virtualbox",    "1.0.13"
-github "onepassword",    "1.1.2"
+github "onepassword",    "1.1.5"
 github "sublime_text_2", "1.1.0"
 github "gitx",           "1.2.0"
 github "caffeine",       "0.0.1"

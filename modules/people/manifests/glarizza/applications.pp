@@ -5,7 +5,7 @@ class people::glarizza::applications {
   include caffeine
   include iterm2::stable
   include onepassword
-  include dropbox
+  include onepassword::chrome
   include sizeup
   include chrome
   include hipchat
@@ -110,4 +110,6 @@ class people::glarizza::applications {
   }
 
   class { 'vmware_fusion': version => '5.0.3-1040386' }
+  class { 'dropbox': version       => '3.12.5' }
+
 }
