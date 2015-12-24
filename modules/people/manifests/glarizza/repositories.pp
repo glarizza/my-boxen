@@ -35,14 +35,6 @@ class people::glarizza::repositories (
     value => 'diff --cached HEAD^',
   }
 
-  repository { "${my_sourcedir}/saleseng-demo-environment":
-    source => 'puppetlabs/saleseng-demo-environment',
-  }
-
-  repository { "${my_sourcedir}/saleseng-soupkitchen":
-    source => 'puppetlabs/saleseng-soupkitchen',
-  }
-
   repository { "/Users/${my_username}/.vim":
     source => 'glarizza/vim-puppet'
   }
