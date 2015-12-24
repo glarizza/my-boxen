@@ -36,7 +36,8 @@ github "module_data", "0.0.4", :repo => "ripienaar/puppet-module-data"
 # Core modules for a basic development environment. You can replace
 # some/most of these if you want, but it's not recommended.
 
-github "virtualbox",    "1.0.13"
+github "tunnelblick",    "1.0.7"
+github "virtualbox",     "1.0.13"
 github "onepassword",    "1.1.5"
 github "sublime_text_2", "1.1.0"
 github "gitx",           "1.2.0"

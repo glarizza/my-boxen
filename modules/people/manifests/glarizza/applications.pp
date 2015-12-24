@@ -1,5 +1,6 @@
 class people::glarizza::applications {
   include virtualbox
+  include tunnelblick
   include sublime_text_2
   include gitx
   include caffeine
@@ -71,11 +72,6 @@ class people::glarizza::applications {
 
   package { 'A Better Finder Renamer':
     source   => 'http://d3k6s0oeufjjjn.cloudfront.net/download0_126e6b5/ABFRX8.dmg',
-    provider => appdmg,
-  }
-
-  package { 'Tunnelblick':
-    source   => 'http://tunnelblick.googlecode.com/files/Tunnelblick_3.3beta21a.dmg',
     provider => appdmg,
   }
 
