@@ -1,5 +1,12 @@
 class people::glarizza::vagrant {
-  require ::vagrant
+  class { '::vagrant':
+    version => '1.8.0',
+  }
+
+  Vagrant::Plugin {
+    require => Class['::vagrant'],
+  }
+
   vagrant::plugin { 'vagrant-vmware-fusion':
     license => 'puppet:///modules/people/fusion.lic',
   }
