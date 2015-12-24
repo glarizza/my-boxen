@@ -36,6 +36,7 @@ github "module_data", "0.0.4", :repo => "ripienaar/puppet-module-data"
 # Core modules for a basic development environment. You can replace
 # some/most of these if you want, but it's not recommended.
 
+github "virtualbox",    "1.0.13"
 github "onepassword",    "1.1.2"
 github "sublime_text_2", "1.1.0"
 github "gitx",           "1.2.0"
@@ -76,7 +77,7 @@ github "repository",  "2.4.1"
 github "ruby",        "8.5.3"
 github "stdlib",      "4.7.0", :repo => "puppetlabs/puppetlabs-stdlib"
 github "sudo",        "1.0.0"
-github "skype",       "1.0.9"
+github "skype",       "1.1.0"
 github "xquartz",     "1.2.1"
 
 # Optional/custom modules. There are tons available at

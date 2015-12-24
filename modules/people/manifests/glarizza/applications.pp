@@ -1,4 +1,5 @@
 class people::glarizza::applications {
+  include virtualbox
   include sublime_text_2
   include gitx
   include caffeine
@@ -35,12 +36,6 @@ class people::glarizza::applications {
     ensure          => installed,
     provider        => 'homebrew',
     install_options => '--wrap-pbcopy-and-pbpaste',
-  }
-
-  package { 'Virtualbox':
-    ensure => installed,
-    source => 'http://download.virtualbox.org/virtualbox/4.1.22/VirtualBox-4.1.23-80870-OSX.dmg',
-    provider => pkgdmg,
   }
 
   package { 'Skitch':
