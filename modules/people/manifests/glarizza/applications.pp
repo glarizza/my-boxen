@@ -91,7 +91,7 @@ class people::glarizza::applications {
   }
 
   package { 'Yorufukurou':
-    source   => 'http://aki-null.net/yf/YoruFukurou_SL.zip',
+    source   => 'http://aki-null.net/yf/NightOwl.zip',
     provider => compressed_app,
   }
 
