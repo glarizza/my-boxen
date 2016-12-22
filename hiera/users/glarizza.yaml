@@ -1,0 +1,7 @@
+---
+
+boxen::personal::casks:
+  - google-chrome
+  - spotify
+  - 1password
+
