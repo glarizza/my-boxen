@@ -1,5 +1,4 @@
 class people::glarizza::applications {
-  include virtualbox
   include tunnelblick
   include sublime_text_2
   include gitx
@@ -16,6 +15,10 @@ class people::glarizza::applications {
   include packer
   include atom
   include skype
+
+  class { 'virtualbox':
+    version => '5.1.12',
+  }
 
   $homebrew_packages = [
     'tree',
@@ -82,11 +85,6 @@ class people::glarizza::applications {
 
   package { 'Crashplan':
     source   => 'http://download.crashplan.com/installs/mac/install/CrashPlan/CrashPlan_3.2.1_Mac.dmg',
-    provider => pkgdmg,
-  }
-
-  package { 'Pandoc':
-    source   => 'https://pandoc.googlecode.com/files/pandoc-1.12.1-1.dmg',
     provider => pkgdmg,
   }
 
