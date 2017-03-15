@@ -35,6 +35,18 @@ class people::glarizza::repositories (
     value => 'diff --cached HEAD^',
   }
 
+  $tmux_directories = [
+    "/Users/${my_username}/.tmux",
+    "/Users/${my_username}/.tmux/plugins"
+  ]
+
+  file { $tmux_directories: ensure => 'directory' }
+
+  repository { "/Users/${my_username}/.tmux/plugins/tpm":
+    source  => 'tmux-plugins/tpm',
+    require => File["/Users/${my_username}/.tmux/plugins"],
+  }
+
   repository { "/Users/${my_username}/.vim":
     source => 'glarizza/vim-puppet'
   }
